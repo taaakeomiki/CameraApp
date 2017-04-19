@@ -25,9 +25,9 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate,UINaviga
     @IBAction func cameraStart(sender : AnyObject) {
         
         let sourceType:UIImagePickerControllerSourceType = UIImagePickerControllerSourceType.camera
-        
+        // カメラが利用可能かチェック
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera){
-            
+            // インスタンスの作成
             let cameraPicker = UIImagePickerController()
             cameraPicker.sourceType = sourceType
             cameraPicker.delegate = self
@@ -39,18 +39,19 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate,UINaviga
         }
     }
     
-    
+    //　撮影が完了時した時に呼ばれる
       private func imagePickerController(imagePicker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.imageView.image = pickedImage
         }
         
-                imagePicker.dismiss(animated: true, completion: nil)
+        //閉じる処理
+        imagePicker.dismiss(animated: true, completion: nil)
         
     }
     
-    
+    // 写真を保存
     @IBAction func savePic(sender : AnyObject) {
         let image:UIImage! = imageView.image
         
@@ -62,11 +63,12 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate,UINaviga
         }
     }
     
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    // 撮影がキャンセルされた時に呼ばれる
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
+    // 書き込み完了結果の受け取り
     func image(image: UIImage, didFinishSavingWithError error: NSError!, contextInfo: UnsafeMutableRawPointer) {
         if error != nil {
             showAlert(title: "", message: "Failed to save the picture.")
@@ -75,7 +77,7 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate,UINaviga
         }
     }
     
-   
+    // アラートを表示する
     
     
     func showAlert(title: String, message: String) {
@@ -87,7 +89,13 @@ class ViewController: UIViewController ,UIImagePickerControllerDelegate,UINaviga
         alertView.addButton(withTitle: "OK")
         alertView.show()
  
-           
+    
+    /*
+    var alertController = UIAlertController(title: "UIAlertControllerStyle.Alert", message: "i0S8",preferredStyle: .Alert)
+    
+    let
+    */
+        
  }
     
     
